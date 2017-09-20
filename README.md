@@ -1,4 +1,5 @@
 # DYSoftAuth
+
 #杭州鼎永科技有限公司统一身份认证 iOS SDK
 
 ## <a id="Installation"></a> Installation【安装】
@@ -45,4 +46,4 @@
     }];
 ```
 
-#注意 回调函数改变
+#注意 回调函数改变UI请在主线程中执行. block请注意避免循环引用
