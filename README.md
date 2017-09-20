@@ -7,6 +7,7 @@
 
 - Drag all source files under floder `DYSoftAuth` to your project.【将`DYSoftAuth`文件夹中的所有代码拽入项目中】
 - Import the main header file：`#import "DYSoftAuth.h"`【导入主头文件：`#import "DYSoftAuth.h"`】
+- 在项目的`Linked Frameworks and Libraries`下`Add Other`添加  `DYSoftAuth.a`
 
 
 # <a id="Examples"></a> Examples【示例】
@@ -24,20 +25,22 @@
  @param clientID app的ID（分配的）
  @param clientSecret appkey(分配的)
  */
-[[DYSoftAuth sharedAuth] initWithAuthHost:@"http://AuthHost"//认证中心的地址
-                                   authWebUrl:@"http://WebUrl"
-                                     fileHost:@"http://Host1"
-                                        scope:@"openid profile"
-                                     clientID:@"clientID"
-                                 clientSecret:@"clientSecret"];
+[[DYSoftAuth sharedAuth] initWithAuthHost:@"http://AuthHost" //认证中心的地址
+                                   authWebUrl:@"http://WebUrl" //开放平台的地址
+                                     fileHost:@"http://Host1" //文件中心的地址
+                                        scope:@"openid profile" //授权范围 多个类型空格隔开
+                                     clientID:@"clientID" //app的ID（分配的）
+                                 clientSecret:@"clientSecret"]; //appkey(分配的)
 ```
 
-
-
-
-
-##千万要注意，如果你没有`[self.tabBar bringSubviewToFront:self.button];`的话，你点击一次更多里面的按钮后，这个tabbar上的`button`就无法点击了
-
-##这时候你可能会问：为什么没有6娃呢？真是遗憾啊，6娃隐身没抓到啊！！！！
-
-##编程是一种乐趣，分享是乐趣的一部分，如果你有好的想法或建议，欢迎讨论
+3.在需要使用登录的地方导入头文件`#import "DYSoftAuth.h"`
+然后调用登录方法
+```
+[[DYSoftAuth sharedAuth] beginLogin:^(BOOL success, NSString *localizedDescription, DYSoftUser *user) {
+        if (success) {
+            NSLog(@"%@", user);
+        } else {
+            NSLog(@"%@", localizedDescription);
+        }
+    }];
+```
